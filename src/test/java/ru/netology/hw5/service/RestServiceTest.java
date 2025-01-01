@@ -1,26 +1,18 @@
 package ru.netology.hw5.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class RestServiceTest {
 
-    @Test
-    public void test3MonthOfRest () {
+    @ParameterizedTest
+    @CsvFileSource(files="src/test/resources/rest.csv")
+
+    public void testMonthOfRest (int expected, int income, int expense, int threshold) {
         RestService service = new RestService();
 
-        int expected = 3;
-        int actual = service.calculate(10, 3, 20);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test2MonthOfRest () {
-        RestService service = new RestService();
-
-        int expected = 2;
-        int actual = service.calculate(100, 60, 150);
+        int actual = service.calculate(income, expense, threshold);
 
         Assertions.assertEquals(expected, actual);
     }
